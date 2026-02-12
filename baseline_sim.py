@@ -6,8 +6,8 @@ import pandas as pd
 ticker = "SPY"   # S&P 500 ETF
 data = yf.download(
     ticker,
-    start="2015-01-01",
-    end="2024-01-01",
+    start="2015-1-01",
+    end="2026-01-01",
     interval="1d"
 )
 
