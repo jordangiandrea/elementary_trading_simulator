@@ -62,7 +62,7 @@ axes[0].plot(prices, label="SPY Prices", color='blue')
 axes[0].set_xlabel("Date")
 axes[0].set_title('SPY Prices')
 
-axes[1].plot(equity_series, label="Equity Curve", color='red',linestyle='--')
+axes[1].plot(equity_series, label="Equity Curve", color='red')
 axes[1].set_xlabel("Date")
 axes[1].set_title('Equity')
 
