@@ -20,7 +20,7 @@ The simulator is structured into three logical layers:
 
 ### v0.2 constant_friction_sim
 - Added constant spread, the difference between lowest ask and highest bid
-- Added constant slippage noise
+- Added constant Gaussian noise slippage
 - Either buy or sell a constant percent of cash worth of shares
 - Added a next-bar rule so orders based on signal from the day's close price are made at the next day's close price
 
