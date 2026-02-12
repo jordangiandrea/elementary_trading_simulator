@@ -12,13 +12,22 @@ The simulator is structured into three logical layers:
 
 ## Features by Version
 
-### baseline_sim
+### v0.1 baseline_sim
 - Market orders execute at closing price
 - Either buy or sell only one share per day
 - No transaction costs
 - No market friction
 
-### constant_friction_sim
+### v0.2 constant_friction_sim
 - Added constant spread, the difference between lowest ask and highest bid
 - Either buy or sell a constant percent of cash worth of shares
 - Added a next-bar rule so orders based on signal from the day's close price are made at the next day's close price
+
+### v0.3 volatile_friction_sim
+- _Coming soon..._
+
+### v0.4 riskadj_sim
+- _Coming soon..._
+
+### v0.5 portfolio_acct_sim
+- _Coming soon..._
