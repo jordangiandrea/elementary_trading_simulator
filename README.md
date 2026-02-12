@@ -25,7 +25,7 @@ The simulator is structured into three logical layers:
 - Added a next-bar rule so orders based on signal from the day's close price are made at the next day's close price
 
 ### v0.3 volatile_friction_sim
-- _Coming soon..._
+- Made spread and slippage noise proportional to 20-day rolling volatility
 
 ### v0.4 riskadj_sim
 - _Coming soon..._
