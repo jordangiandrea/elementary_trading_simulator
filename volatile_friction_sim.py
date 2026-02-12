@@ -16,10 +16,12 @@ data = data.dropna()
 data = data.sort_index()
 
 prices = data["Close"]
+returns = prices.pct_change()
+rolling_vol = returns.rolling(window=20).std().shift(1)
 
 CASH = 100_000
-SPREAD = 0.02
-SLIP_VAR = 0.001
+K_SPREAD = 0.5
+K_SLIP = 0.5
 CAP_PERCENT = 0.01
 LATENCY = 1
 
@@ -35,11 +37,11 @@ def strategy(hist):
     long = hist["Close"].iloc[-50:].mean()
 
     if float(short) > float(long):
-        return 1
+        return 1 #buy
     else:
-        return -1
+        return -1 #sell
 
-def market_sim(cash,spread,slip_var,cap_percent,latency):
+def market_sim(cash,spread,slip_var,k_slip,k_spread,cap_percent,latency):
 
     equity_curve = []
     equity_curve.append(cash)
@@ -49,6 +51,9 @@ def market_sim(cash,spread,slip_var,cap_percent,latency):
     for t in range(0, len(data)-latency):
         price = data["Close"].iloc[t]
         exec_price = data["Close"].iloc[t+latency]
+        current_vol = rolling_vol.iloc[t]
+        spread_pct = k_spread*current_vol
+
         signal = strategy(data.iloc[:t])
         position_size = cap_percent * cash / price
 

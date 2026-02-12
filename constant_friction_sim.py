@@ -19,6 +19,7 @@ prices = data["Close"]
 
 CASH = 100_000
 SPREAD = 0.02
+SLIP_VAR = 0.001
 CAP_PERCENT = 0.01
 LATENCY = 1
 
@@ -38,11 +39,12 @@ def strategy(hist):
     else:
         return -1
 
-def market_sim(cash,spread,cap_percent,latency):
+def market_sim(cash,spread,slip_var,cap_percent,latency):
 
     equity_curve = []
     equity_curve.append(cash)
     position = 0
+    slippage = np.random.normal(0, slip_var)
 
     for t in range(0, len(data)-latency):
         price = data["Close"].iloc[t]
@@ -51,12 +53,12 @@ def market_sim(cash,spread,cap_percent,latency):
         position_size = cap_percent * cash / price
 
         if signal == 1 and float(cash) >= float(price):
-            buy_price = (exec_price + spread/2)
+            buy_price = (exec_price + spread/2)*(1+slippage)
             position += position_size
             cash -= buy_price
 
         elif signal == -1 and float(position) > 0:
-            sell_price = (exec_price - spread/2)
+            sell_price = (exec_price - spread/2)*(1+slippage)
             position -= position_size
             cash += sell_price
  
@@ -66,7 +68,7 @@ def market_sim(cash,spread,cap_percent,latency):
     equity_series = pd.Series(equity_curve, index=prices.index)
     return equity_series
 
-results = market_sim(CASH,SPREAD,CAP_PERCENT,LATENCY)
+results = market_sim(CASH,SPREAD,SLIP_VAR,CAP_PERCENT,LATENCY)
 
 fig, axes = plt.subplots(nrows=1, ncols=2,)
 
