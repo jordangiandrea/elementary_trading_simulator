@@ -19,5 +19,6 @@ The simulator is structured into three logical layers:
 - No market friction
 
 ### constant_friction_sim
-- Stop-loss support
-- Fixed fractional position sizing (risk % per trade)
+- Added constant spread, the difference between lowest ask and highest bid
+- Either buy or sell a constant percent of cash worth of shares
+- Added a next-bar rule so orders based on signal from the day's close price are made at the next day's close price
