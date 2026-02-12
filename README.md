@@ -32,3 +32,5 @@ The simulator is structured into three logical layers:
 
 ### v0.5 portfolio_acct_sim
 - _Coming soon..._
+
+##Analysis
